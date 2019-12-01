@@ -1,0 +1,67 @@
+---
+title: "Measurement of Success"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shinydashboard)
+library(shiny)
+library(tidyverse)
+```
+
+```{r include=FALSE}
+bands = read_csv(file = './data/bands.csv')
+solo_artists = read_csv(file = './data/solo_artists.csv')
+band_solo = readxl::read_excel('./data/bands&artists.xlsx') %>% 
+  janitor::clean_names()
+```
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+```{r}
+# genres selectInput widget
+genres = bands %>% distinct(genre) %>% pull()
+selectInput(
+  'genre_choice',
+  label= h3('Select genre'),
+  choices = genres, selected = "Pop"
+)
+
+# band performers selectInput widget
+band = bands %>% distinct(performer) %>% pull()
+
+selectInput(
+  'band_performer',
+  label= h3('Select performer'),
+  choices = band, selected = "One Direction"
+)
+
+
+
+
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
